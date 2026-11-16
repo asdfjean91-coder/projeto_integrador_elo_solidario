@@ -47,7 +47,23 @@ async function carregarCampanhas() {
             </div>`;
         return;
     }
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializa o slide do Hero automaticamente
+    const heroEl = document.getElementById('heroCarousel');
+    if (heroEl && window.bootstrap) {
+        new window.bootstrap.Carousel(heroEl, {
+            interval: 4000,
+            ride: 'carousel',
+            pause: 'hover'
+        });
+    }
 
+    carregarNavbar();
+    carregarCampanhas();
+    document.getElementById('filtro-busca').addEventListener('input', carregarCampanhas);
+    document.getElementById('filtro-cidade').addEventListener('input', carregarCampanhas);
+    document.getElementById('filtro-status').addEventListener('change', carregarCampanhas);
+});
     container.innerHTML = filtradas.map((c, idx) => {
         const totalMeta = c.campanha_item.reduce((acc, i) => acc + i.quantidade_meta, 0);
         const totalRec = c.campanha_item.reduce((acc, i) => acc + i.quantidade_recebida, 0);
