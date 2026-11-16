@@ -8,7 +8,7 @@ selectPerfil.addEventListener('change', () => {
     camposOrg.classList.toggle('d-none', selectPerfil.value !== 'organizacao');
 });
 
-// LOGIN (CT02: mensagem genérica)
+// LOGIN (CT02)
 document.getElementById('form-login').addEventListener('submit', async (e) => {
     e.preventDefault();
     alerta.innerHTML = '';
@@ -24,7 +24,7 @@ document.getElementById('form-login').addEventListener('submit', async (e) => {
     window.location.href = 'index.html';
 });
 
-// CADASTRO (CT01: valida e-mail único + mensagem clara de sucesso)
+// CADASTRO (CT01 + gravação garantida via Trigger)
 document.getElementById('form-cadastro').addEventListener('submit', async (e) => {
     e.preventDefault();
     alerta.innerHTML = '';
@@ -39,65 +39,44 @@ document.getElementById('form-cadastro').addEventListener('submit', async (e) =>
     const telefone = document.getElementById('cad-telefone').value;
     const password = document.getElementById('cad-senha').value;
 
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    const metadata = {
+        nome,
+        telefone,
+        perfil,
+        org_nome: document.getElementById('org-nome').value,
+        org_tipo: document.getElementById('org-tipo').value,
+        org_cnpj: document.getElementById('org-cnpj').value,
+        org_endereco: document.getElementById('org-endereco').value,
+        org_bairro: document.getElementById('org-bairro').value,
+        org_cidade: document.getElementById('org-cidade').value,
+        org_horario: document.getElementById('org-horario').value
+    };
 
-    if (error || !data.user) {
-        btnSubmit.disabled = false;
-        btnSubmit.textContent = 'Finalizar Cadastro';
-        alerta.innerHTML = `<div class="alert alert-danger" role="alert">Não foi possível cadastrar: este e-mail já está em uso ou é inválido.</div>`;
-        return;
-    }
+    const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: metadata }
+    });
 
-    const userId = data.user.id;
-
-    // 1. Grava perfil na tabela usuario
-    const { error: errUser } = await supabase
-        .from('usuario')
-        .insert({ id: userId, nome, email, telefone, perfil });
-
-    if (errUser) {
-        btnSubmit.disabled = false;
-        btnSubmit.textContent = 'Finalizar Cadastro';
-        alerta.innerHTML = `<div class="alert alert-danger" role="alert">Erro ao guardar dados do utilizador: ${errUser.message}</div>`;
-        return;
-    }
-
-    // 2. Se for organização, cria registo pendente (RN01)
-    if (perfil === 'organizacao') {
-        const { error: errOrg } = await supabase.from('organizacao').insert({
-            usuario_id: userId,
-            nome: document.getElementById('org-nome').value,
-            tipo: document.getElementById('org-tipo').value,
-            cnpj: document.getElementById('org-cnpj').value,
-            endereco: document.getElementById('org-endereco').value,
-            bairro: document.getElementById('org-bairro').value,
-            cidade: document.getElementById('org-cidade').value,
-            horario_atendimento: document.getElementById('org-horario').value,
-            status: 'pendente'
-        });
-
-        if (errOrg) {
-            btnSubmit.disabled = false;
-            btnSubmit.textContent = 'Finalizar Cadastro';
-            alerta.innerHTML = `<div class="alert alert-danger" role="alert">Erro ao registar organização: ${errOrg.message}</div>`;
-            return;
-        }
-    }
-
-    // Limpa o formulário e exibe mensagem permanente de sucesso com botão de ação
-    e.target.reset();
-    camposOrg.classList.add('d-none');
     btnSubmit.disabled = false;
     btnSubmit.textContent = 'Finalizar Cadastro';
 
+    if (error || !data.user) {
+        alerta.innerHTML = `<div class="alert alert-danger" role="alert">Erro ao cadastrar: ${error?.message || 'verifique os dados e tente novamente.'}</div>`;
+        return;
+    }
+
+    e.target.reset();
+    camposOrg.classList.add('d-none');
+
     const avisoExtra = perfil === 'organizacao'
         ? '<p class="mb-2 small">O cadastro da sua organização está <strong>pendente de aprovação</strong> pelo administrador (RN01).</p>'
-        : '<p class="mb-2 small">Já pode escolher uma campanha e registar as suas doações.</p>';
+        : '<p class="mb-2 small">Sua conta já está ativa para realizar doações.</p>';
 
     alerta.innerHTML = `
         <div class="alert alert-success shadow-sm" role="alert">
             <h4 class="alert-heading h6 fw-bold">✅ Cadastro realizado com sucesso!</h4>
-            <p class="mb-1">Bem-vindo(a), <strong>${nome}</strong>! A sua conta foi criada e autenticada.</p>
+            <p class="mb-1">Bem-vindo(a), <strong>${nome}</strong>!</p>
             ${avisoExtra}
             <hr>
             <a href="index.html" class="btn btn-success btn-sm fw-bold">Ir para a Página Inicial</a>
