@@ -1,65 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap');
+
 :root {
-    --verde-primario: #1b6b50;
-    --verde-escuro: #134e3a;
-    --verde-claro: #e8f3ef;
-    --amarelo-destaque: #f2b749;
-    --cinza-fundo: #f8f9fa;
-    --texto-escuro: #1e293b;
+    --verde-primario: #15803d;
+    --verde-vibrante: #16a34a;
+    --verde-escuro: #14532d;
+    --verde-suave: #dcfce7;
+    --amarelo-sol: #f59e0b;
+    --amarelo-hover: #d97706;
+    --fundo-claro: #f8fafc;
+    --texto-principal: #0f172a;
+    --texto-secundario: #475569;
 }
 
 body {
-    background-color: var(--cinza-fundo);
-    color: var(--texto-escuro);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--fundo-claro);
+    color: var(--texto-principal);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     min-width: 360px;
 }
 
-.navbar-elo {
-    background-color: var(--verde-primario);
+h1, h2, h3, .navbar-brand {
+    font-family: 'Montserrat', sans-serif;
 }
 
+/* Navbar moderna */
+.navbar-elo {
+    background: linear-gradient(90deg, var(--verde-escuro) 0%, var(--verde-primario) 100%);
+    box-shadow: 0 2px 12px rgba(20, 83, 45, 0.15);
+}
+
+/* Hero Section Alegre e Moderna */
+.hero-moderno {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 55%, #fef3c7 100%);
+    border-radius: 24px;
+    border: 1px solid #bbf7d0;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-badge {
+    background-color: #ffffff;
+    color: var(--verde-primario);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    border-radius: 50px;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.hero-img-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 16px 32px rgba(20, 83, 45, 0.18);
+    border: 4px solid #ffffff;
+}
+
+.hero-img-wrapper img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Botões */
 .btn-elo {
     background-color: var(--verde-primario);
     color: #ffffff;
     font-weight: 600;
+    border-radius: 10px;
     border: none;
+    transition: all 0.2s ease;
 }
 
 .btn-elo:hover, .btn-elo:focus {
     background-color: var(--verde-escuro);
     color: #ffffff;
+    transform: translateY(-1px);
 }
 
 .btn-elo-amarelo {
-    background-color: var(--amarelo-destaque);
-    color: #1e293b;
+    background-color: var(--amarelo-sol);
+    color: #0f172a;
     font-weight: 700;
+    border-radius: 10px;
     border: none;
+    transition: all 0.2s ease;
 }
 
-.hero-card {
-    background-color: var(--verde-claro);
-    border: 1px solid #cce3db;
+.btn-elo-amarelo:hover {
+    background-color: var(--amarelo-hover);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* Cards de Como Funciona */
+.step-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+
+.step-icon {
+    width: 48px;
+    height: 48px;
     border-radius: 12px;
+    background-color: var(--verde-suave);
+    color: var(--verde-primario);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+/* Cards de Campanha */
+.card-campanha {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-campanha:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(21, 128, 61, 0.12);
+}
+
+.card-campanha-img {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
 }
 
 .progress {
     height: 12px;
     background-color: #e2e8f0;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 .progress-bar-elo {
-    background-color: var(--verde-primario);
+    background: linear-gradient(90deg, var(--verde-primario), var(--verde-vibrante));
 }
 
-.card-campanha {
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    transition: transform 0.15s ease;
-}
-
-.card-campanha:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+.hero-card {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 14px;
 }
