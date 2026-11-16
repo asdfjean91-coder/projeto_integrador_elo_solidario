@@ -3,21 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transparência — Elo Solidário</title>
+    <title>Portal da Transparência — Elo Solidário</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-dark navbar-elo py-3">
+    <nav class="navbar navbar-dark navbar-elo py-3 sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">🤝 Elo Solidário</a>
-            <div id="nav-acoes"></div>
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
+                <span class="fs-4">🤝</span>
+                <span>Elo Solidário</span>
+            </a>
+            <div id="nav-acoes" class="d-flex align-items-center"></div>
         </div>
     </nav>
-    <main class="container my-4" style="max-width: 820px;">
-        <h1 class="h4 fw-bold text-success mb-3">Painel Público de Transparência (RF10)</h1>
-        <div id="painel-transparencia">Carregando...</div>
+
+    <main class="container my-4" style="max-width: 900px;">
+        <div class="hero-moderno p-4 mb-4 text-center">
+            <span class="hero-badge mb-2">📊 Prestação de Contas Aberta (LGPD)</span>
+            <h1 class="h3 fw-bold mb-2">Portal Público de Transparência</h1>
+            <p class="small text-secondary mb-0">
+                Acompanhe os resultados reais das campanhas encerradas e o total de famílias atendidas, preservando a privacidade dos beneficiários (RN06).
+            </p>
+        </div>
+
+        <div id="painel-transparencia">
+            <div class="text-center py-4 text-muted">Carregando indicadores de impacto...</div>
+        </div>
     </main>
+
+    <footer class="bg-white border-top py-4 mt-5">
+        <div class="container text-center">
+            <p class="fw-bold text-success mb-1">🤝 Elo Solidário</p>
+            <p class="small text-muted mb-0">Projeto Integrador — Curso Técnico em Análise e Desenvolvimento de Sistemas • CETI Malaquias Ribeiro Damasceno</p>
+        </div>
+    </footer>
+
     <script type="module" src="js/transparencia.js"></script>
 </body>
 </html>

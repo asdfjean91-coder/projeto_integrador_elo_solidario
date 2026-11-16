@@ -8,74 +8,115 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-dark navbar-elo py-3">
+    <nav class="navbar navbar-dark navbar-elo py-3 sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">🤝 Elo Solidário</a>
-            <div id="nav-acoes"></div>
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
+                <span class="fs-4">🤝</span>
+                <span>Elo Solidário</span>
+            </a>
+            <div id="nav-acoes" class="d-flex align-items-center"></div>
         </div>
     </nav>
+
     <main class="container my-4">
         <div id="status-org-box" class="mb-4"></div>
+
+        <!-- Indicadores rápidos -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="step-card p-3 text-center">
+                    <span class="fs-3 fw-bold text-success" id="kpi-prometidas">0</span>
+                    <p class="small text-muted mb-0">Doações aguardando entrega</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="step-card p-3 text-center">
+                    <span class="fs-3 fw-bold text-primary" id="kpi-ativas">0</span>
+                    <p class="small text-muted mb-0">Campanhas ativas</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="step-card p-3 text-center">
+                    <span class="fs-3 fw-bold text-warning" id="kpi-familias">0</span>
+                    <p class="small text-muted mb-0">Famílias atendidas</p>
+                </div>
+            </div>
+        </div>
+
         <div class="row g-4">
+            <!-- Coluna Esquerda: Criar Campanha e Prestação de Contas -->
             <div class="col-lg-5">
-                <div class="card p-3 shadow-sm mb-4">
-                    <h2 class="h5 fw-bold text-success mb-3">Nova Campanha</h2>
+                <div class="card border-0 p-4 shadow-sm mb-4" style="border-radius: 20px;">
+                    <h2 class="h5 fw-bold text-success mb-3">📢 Criar Nova Campanha</h2>
                     <form id="form-nova-campanha">
                         <div class="mb-2">
-                            <label class="form-label">Título</label>
-                            <input type="text" id="camp-titulo" class="form-control" required>
+                            <label for="camp-titulo" class="form-label small fw-semibold">Título da Campanha</label>
+                            <input type="text" id="camp-titulo" class="form-control" placeholder="Ex: Cesta Básica Solidária" required>
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Descrição</label>
-                            <textarea id="camp-desc" class="form-control" rows="2" required></textarea>
+                            <label for="camp-desc" class="form-label small fw-semibold">Descrição e Objetivo</label>
+                            <textarea id="camp-desc" class="form-control" rows="2" placeholder="Explique quem será beneficiado..." required></textarea>
                         </div>
-                        <div class="mb-2">
-                            <label class="form-label">Data de Encerramento</label>
+                        <div class="mb-3">
+                            <label for="camp-fim" class="form-label small fw-semibold">Data de Encerramento</label>
                             <input type="date" id="camp-fim" class="form-control" required>
                         </div>
-                        <div class="mb-2">
-                            <label class="form-label">Item do Catálogo e Meta</label>
-                            <div class="input-group">
-                                <select id="select-item-cat" class="form-select"></select>
-                                <input type="number" id="meta-item-cat" class="form-control" placeholder="Qtd" min="1" required>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-elo w-100 mt-2">Publicar Campanha</button>
+
+                        <label class="form-label small fw-semibold">Itens Necessários e Metas (RN02)</label>
+                        <div id="container-itens-campanha" class="mb-2"></div>
+                        <button type="button" id="btn-add-item-camp" class="btn btn-outline-success btn-sm w-100 mb-3">
+                            + Adicionar outro item do catálogo
+                        </button>
+
+                        <button type="submit" class="btn btn-elo w-100 py-2">Publicar Campanha</button>
                     </form>
                 </div>
 
-                <div class="card p-3 shadow-sm">
-                    <h2 class="h5 fw-bold text-success mb-3">Registrar Distribuição (RN06)</h2>
+                <div class="card border-0 p-4 shadow-sm" style="border-radius: 20px;">
+                    <h2 class="h5 fw-bold text-success mb-3">📊 Registrar Distribuição (RN06)</h2>
                     <form id="form-distribuicao">
                         <div class="mb-2">
-                            <label class="form-label">Campanha</label>
+                            <label for="select-camp-dist" class="form-label small fw-semibold">Campanha</label>
                             <select id="select-camp-dist" class="form-select" required></select>
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Total de Famílias Atendidas</label>
+                            <label for="dist-familias" class="form-label small fw-semibold">Total de Famílias Atendidas</label>
                             <input type="number" id="dist-familias" class="form-control" min="1" required>
                         </div>
-                        <div class="mb-2">
-                            <label class="form-label">Descrição da Entrega (sem dados pessoais)</label>
-                            <textarea id="dist-desc" class="form-control" rows="2" required></textarea>
+                        <div class="mb-3">
+                            <label for="dist-desc" class="form-label small fw-semibold">Resumo da Entrega (sem dados pessoais)</label>
+                            <textarea id="dist-desc" class="form-control" rows="2" placeholder="Ex: Entrega de 30 cestas básicas na comunidade..." required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-elo-amarelo w-100 mt-2">Registrar Prestação de Contas</button>
+                        <button type="submit" class="btn btn-elo-amarelo w-100 py-2">Publicar Prestação de Contas</button>
                     </form>
                 </div>
             </div>
 
+            <!-- Coluna Direita: Confirmar Recebimento e Campanhas -->
             <div class="col-lg-7">
-                <div class="card p-3 shadow-sm mb-4">
-                    <h2 class="h5 fw-bold text-success mb-3">Doações Aguardando Recebimento (RF07)</h2>
+                <div class="card border-0 p-4 shadow-sm mb-4" style="border-radius: 20px;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2 class="h5 fw-bold text-success mb-0">📥 Doações a Confirmar (RF07)</h2>
+                        <input type="search" id="busca-codigo-doacao" class="form-control form-control-sm w-50" placeholder="Buscar código (DOA-...)">
+                    </div>
                     <div id="lista-doacoes-pendentes">Carregando...</div>
                 </div>
-                <div class="card p-3 shadow-sm">
-                    <h2 class="h5 fw-bold text-success mb-3">Minhas Campanhas</h2>
+
+                <div class="card border-0 p-4 shadow-sm" style="border-radius: 20px;">
+                    <h2 class="h5 fw-bold text-success mb-3">📋 Minhas Campanhas</h2>
                     <div id="lista-minhas-campanhas">Carregando...</div>
                 </div>
             </div>
         </div>
     </main>
+
+    <footer class="bg-white border-top py-4 mt-5">
+        <div class="container text-center">
+            <p class="fw-bold text-success mb-1">🤝 Elo Solidário</p>
+            <p class="small text-muted mb-0">Projeto Integrador — Curso Técnico em Análise e Desenvolvimento de Sistemas • CETI Malaquias Ribeiro Damasceno</p>
+        </div>
+    </footer>
+
     <script type="module" src="js/painel-org.js"></script>
 </body>
 </html>

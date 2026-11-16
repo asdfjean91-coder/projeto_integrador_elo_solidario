@@ -8,16 +8,70 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-dark navbar-elo py-3">
+    <nav class="navbar navbar-dark navbar-elo py-3 sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">🤝 Elo Solidário</a>
-            <div id="nav-acoes"></div>
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
+                <span class="fs-4">🤝</span>
+                <span>Elo Solidário</span>
+            </a>
+            <div id="nav-acoes" class="d-flex align-items-center"></div>
         </div>
     </nav>
-    <main class="container my-4" style="max-width: 820px;">
-        <h1 class="h4 fw-bold text-success mb-3">Aprovação de Organizações (RF02)</h1>
-        <div id="lista-orgs-admin">Carregando...</div>
+
+    <main class="container my-4">
+        <div class="hero-moderno p-4 mb-4">
+            <span class="hero-badge mb-2">🛡️ Painel do Administrador</span>
+            <h1 class="h4 fw-bold mb-1">Verificação de Organizações e Catálogo</h1>
+            <p class="small text-secondary mb-0">Aprove instituições confiáveis (RN01) e gerencie os itens permitidos para doação (RN04).</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Coluna 1: Organizações -->
+            <div class="col-lg-7">
+                <div class="card border-0 p-4 shadow-sm" style="border-radius: 20px;">
+                    <h2 class="h5 fw-bold text-success mb-3">🏢 Organizações Cadastradas (RF02)</h2>
+                    <div id="lista-orgs-admin">Carregando...</div>
+                </div>
+            </div>
+
+            <!-- Coluna 2: Catálogo de Itens -->
+            <div class="col-lg-5">
+                <div class="card border-0 p-4 shadow-sm" style="border-radius: 20px;">
+                    <h2 class="h5 fw-bold text-success mb-3">📦 Catálogo de Itens (RF11)</h2>
+                    <form id="form-novo-item" class="mb-3">
+                        <div class="mb-2">
+                            <label class="form-label small fw-semibold">Categoria</label>
+                            <select id="select-cat-admin" class="form-select" required></select>
+                        </div>
+                        <div class="row g-2 mb-2">
+                            <div class="col-8">
+                                <input type="text" id="novo-item-nome" class="form-control" placeholder="Nome do item (ex: Farinha)" required>
+                            </div>
+                            <div class="col-4">
+                                <select id="novo-item-unidade" class="form-select">
+                                    <option value="kg">kg</option>
+                                    <option value="un">un</option>
+                                    <option value="L">L</option>
+                                    <option value="pacote">pacote</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-elo btn-sm w-100">+ Adicionar Item ao Catálogo</button>
+                    </form>
+
+                    <div id="lista-itens-admin" class="small"></div>
+                </div>
+            </div>
+        </div>
     </main>
+
+    <footer class="bg-white border-top py-4 mt-5">
+        <div class="container text-center">
+            <p class="fw-bold text-success mb-1">🤝 Elo Solidário</p>
+            <p class="small text-muted mb-0">Projeto Integrador — Curso Técnico em Análise e Desenvolvimento de Sistemas • CETI Malaquias Ribeiro Damasceno</p>
+        </div>
+    </footer>
+
     <script type="module" src="js/painel-admin.js"></script>
 </body>
 </html>

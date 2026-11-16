@@ -8,61 +8,36 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-dark navbar-elo py-3 sticky-top">
+    <nav class="navbar navbar-dark navbar-elo py-3">
         <div class="container">
-            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
-                <span class="fs-4">🤝</span>
-                <span>Elo Solidário</span>
-            </a>
-            <div id="nav-acoes" class="d-flex align-items-center"></div>
+            <a class="navbar-brand fw-bold" href="index.html">🤝 Elo Solidário</a>
+            <div id="nav-acoes"></div>
         </div>
     </nav>
 
-    <main class="container my-4" style="max-width: 780px;">
-        <div class="mb-3">
-            <a href="index.html" class="text-decoration-none text-success fw-semibold small">← Voltar para todas as campanhas</a>
-        </div>
+    <main class="container my-4" style="max-width: 720px;">
+        <div id="detalhe-campanha" class="card p-4 shadow-sm mb-4">Carregando...</div>
 
-        <div id="detalhe-campanha" class="card border-0 p-4 shadow-sm mb-4" style="border-radius: 20px;">
-            <div class="text-center py-4 text-muted">Carregando informações da campanha...</div>
-        </div>
-
-        <form id="form-doacao" class="card border-0 p-4 shadow-sm" style="border-radius: 20px;">
-            <div class="d-flex align-items-center gap-2 mb-3">
-                <span class="fs-4">🎁</span>
-                <div>
-                    <h2 class="h5 fw-bold text-success mb-0">Registrar Minha Doação</h2>
-                    <p class="small text-muted mb-0">Escolha os itens e quantidades que você pretende entregar</p>
-                </div>
-            </div>
-
+        <form id="form-doacao" class="card p-4 shadow-sm">
+            <h2 class="h5 fw-bold text-success mb-3">Registrar Doação</h2>
             <div id="alerta-doacao"></div>
             <div id="lista-itens-doar" class="mb-3"></div>
 
             <div class="mb-3">
-                <label for="data-prevista" class="form-label fw-semibold">📅 Data prevista de entrega</label>
+                <label for="data-prevista" class="form-label fw-semibold">Data prevista de entrega</label>
                 <input type="date" id="data-prevista" class="form-control" required>
             </div>
 
-            <div class="form-check p-3 rounded-3 mb-3" style="background-color: #f0fdf4; border: 1px solid #bbf7d0;">
-                <input class="form-check-input ms-0 me-2" type="checkbox" id="check-validade" required>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="check-validade" required>
                 <label class="form-check-label small" for="check-validade">
-                    Confirmo que os alimentos/itens estão dentro do prazo de validade e com embalagem íntegra (RN04).
+                    Confirmo que os itens estão dentro do prazo de validade e com embalagem íntegra (RN04).
                 </label>
             </div>
 
-            <button type="submit" class="btn btn-elo btn-lg w-100 fs-6 shadow-sm">
-                ✅ Confirmar Doação e Gerar Código
-            </button>
+            <button type="submit" class="btn btn-elo w-100 py-2">Confirmar Doação e Gerar Código</button>
         </form>
     </main>
-
-    <footer class="bg-white border-top py-4 mt-5">
-        <div class="container text-center">
-            <p class="fw-bold text-success mb-1">🤝 Elo Solidário</p>
-            <p class="small text-muted mb-0">Projeto Integrador — Curso Técnico em Análise e Desenvolvimento de Sistemas • CETI Malaquias Ribeiro Damasceno</p>
-        </div>
-    </footer>
 
     <script type="module" src="js/campanha.js"></script>
 </body>
