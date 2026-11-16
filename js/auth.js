@@ -101,7 +101,14 @@ document.getElementById('form-cadastro').addEventListener('submit', async (e) =>
             status: 'pendente'
         }, { onConflict: 'usuario_id' });
     }
-
+// Abre automaticamente a aba "Criar Conta" se vier de ?aba=cadastro
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('aba') === 'cadastro') {
+    const tabCadastroBtn = document.querySelector('[data-bs-target="#tab-cadastro"]');
+    if (tabCadastroBtn) {
+        new bootstrap.Tab(tabCadastroBtn).show();
+    }
+}
     // 3. Faz login automático imediatamente após o cadastro
     await supabase.auth.signInWithPassword({ email, password });
 
