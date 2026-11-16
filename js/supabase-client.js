@@ -1,7 +1,7 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-const SUPABASE_URL = 'https://SEU-PROJETO.supabase.co';
-const SUPABASE_ANON_KEY = 'SUA_CHAVE_ANON_PUBLICA';
+const SUPABASE_URL = 'https://jtvvlelisnuskqumjvxp.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0dnZsZWxpc251c2txdW1qdnhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MjQwMTQsImV4cCI6MjExMDQwMDAxNH0.XaUZeXVEKC5D3E6OOaDNqkMjHqHbebGYkBkhjFv6HME'; // Mantenha a sua chave anon public que já está no arquivo
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -10,9 +10,18 @@ export async function carregarNavbar() {
     const navMenu = document.getElementById('nav-acoes');
     if (!navMenu) return;
 
+    // Botões de acesso rápido visíveis na barra superior
+    const linksPerfis = `
+        <a href="transparencia.html" class="btn btn-outline-light btn-sm">📊 Transparência</a>
+        <a href="painel-doador.html" class="btn btn-outline-light btn-sm">💛 Doador</a>
+        <a href="painel-org.html" class="btn btn-outline-light btn-sm">🏢 Organização</a>
+        <a href="painel-admin.html" class="btn btn-outline-light btn-sm">🛡️ Admin</a>
+    `;
+
     if (!user) {
+        navMenu.className = 'd-flex flex-wrap align-items-center gap-2';
         navMenu.innerHTML = `
-            <a href="transparencia.html" class="btn btn-outline-light btn-sm me-2">Transparência</a>
+            ${linksPerfis}
             <a href="login.html" class="btn btn-elo-amarelo btn-sm">Entrar / Cadastrar</a>
         `;
         return;
@@ -24,21 +33,13 @@ export async function carregarNavbar() {
         .eq('id', user.id)
         .single();
 
-    let linkPainel = 'painel-doador.html';
-    let labelPainel = 'Minhas Doações';
+    const badgePerfil = perfilData?.perfil ? `(${perfilData.perfil.toUpperCase()})` : '';
 
-    if (perfilData?.perfil === 'organizacao') {
-        linkPainel = 'painel-org.html';
-        labelPainel = 'Painel da Organização';
-    } else if (perfilData?.perfil === 'admin') {
-        linkPainel = 'painel-admin.html';
-        labelPainel = 'Administração';
-    }
-
+    navMenu.className = 'd-flex flex-wrap align-items-center gap-2';
     navMenu.innerHTML = `
-        <a href="transparencia.html" class="btn btn-outline-light btn-sm me-2">Transparência</a>
-        <a href="${linkPainel}" class="btn btn-light btn-sm me-2 fw-bold text-success">${labelPainel}</a>
-        <button id="btn-sair" class="btn btn-outline-warning btn-sm">Sair</button>
+        ${linksPerfis}
+        <span class="badge bg-light text-success py-2 px-2 d-none d-md-inline">👤 ${badgePerfil}</span>
+        <button id="btn-sair" class="btn btn-warning btn-sm fw-bold">Sair</button>
     `;
 
     document.getElementById('btn-sair').addEventListener('click', async () => {
