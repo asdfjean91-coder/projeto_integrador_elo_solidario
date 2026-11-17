@@ -1,7 +1,7 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 const SUPABASE_URL = 'https://jtvvlelisnuskqumjvxp.supabase.co';
-const SUPABASE_ANON_KEY = 'SUA_CHAVE_ANON_PUBLICA';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0dnZsZWxpc251c2txdW1qdnhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MjQwMTQsImV4cCI6MjExMDQwMDAxNH0.XaUZeXVEKC5D3E6OOaDNqkMjHqHbebGYkBkhjFv6HME';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
