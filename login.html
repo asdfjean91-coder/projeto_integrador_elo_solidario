@@ -8,13 +8,17 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-dark navbar-elo py-3">
+    <nav class="navbar navbar-dark navbar-elo py-3 sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">🤝 Elo Solidário</a>
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
+                <span class="fs-4">🤝</span>
+                <span>Elo Solidário</span>
+            </a>
+            <a href="index.html" class="btn btn-outline-light btn-sm">← Início</a>
         </div>
     </nav>
 
-    <main class="container my-4" style="max-width: 540px;">
+    <main class="container my-4" style="max-width: 560px;">
         <ul class="nav nav-tabs mb-3" id="authTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active fw-bold" data-bs-toggle="tab" data-bs-target="#tab-login" type="button">Entrar</button>
@@ -26,56 +30,56 @@
 
         <div id="alerta-auth"></div>
 
-        <div class="tab-content card p-4 shadow-sm">
+        <div class="tab-content card border-0 p-4 shadow-sm" style="border-radius: 20px;">
             <div class="tab-pane fade show active" id="tab-login">
                 <form id="form-login">
                     <div class="mb-3">
-                        <label for="login-email" class="form-label">E-mail</label>
+                        <label for="login-email" class="form-label fw-semibold">E-mail</label>
                         <input type="email" id="login-email" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label for="login-senha" class="form-label">Senha</label>
+                        <label for="login-senha" class="form-label fw-semibold">Senha</label>
                         <input type="password" id="login-senha" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-elo w-100">Entrar</button>
+                    <button type="submit" class="btn btn-elo w-100 py-2">Entrar</button>
                 </form>
             </div>
 
             <div class="tab-pane fade" id="tab-cadastro">
                 <form id="form-cadastro">
                     <div class="mb-3">
-                        <label for="cad-perfil" class="form-label">Tipo de Cadastro</label>
+                        <label for="cad-perfil" class="form-label fw-semibold">Tipo de Cadastro</label>
                         <select id="cad-perfil" class="form-select">
-                            <option value="doador">Sou Doador (Pessoa Física / Empresa)</option>
-                            <option value="organizacao">Sou Organização Receptora (ONG / Igreja / Associação)</option>
+                            <option value="doador">💛 Sou Doador (Pessoa Física / Empresa)</option>
+                            <option value="organizacao">🏢 Sou Organização Receptora (ONG / Igreja / Associação)</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="cad-nome" class="form-label">Nome Completo (ou Responsável)</label>
+                        <label for="cad-nome" class="form-label fw-semibold">Nome Completo (ou Responsável)</label>
                         <input type="text" id="cad-nome" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label for="cad-email" class="form-label">E-mail</label>
+                        <label for="cad-email" class="form-label fw-semibold">E-mail</label>
                         <input type="email" id="cad-email" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label for="cad-telefone" class="form-label">WhatsApp / Telefone (com DDD)</label>
+                        <label for="cad-telefone" class="form-label fw-semibold">WhatsApp / Telefone (com DDD)</label>
                         <input type="tel" id="cad-telefone" class="form-control" placeholder="89999999999" required>
                     </div>
                     <div class="mb-3">
-                        <label for="cad-senha" class="form-label">Senha (mínimo 6 caracteres)</label>
+                        <label for="cad-senha" class="form-label fw-semibold">Senha (mínimo 6 caracteres)</label>
                         <input type="password" id="cad-senha" class="form-control" minlength="6" required>
                     </div>
 
                     <div id="campos-org" class="d-none border-top pt-3 mt-3">
-                        <h2 class="h6 fw-bold text-success">Dados da Organização (Ponto de Coleta)</h2>
+                        <h2 class="h6 fw-bold text-success mb-3">🏢 Dados da Organização (Ponto de Coleta)</h2>
                         <div class="mb-2">
-                            <label for="org-nome" class="form-label">Nome da Instituição</label>
-                            <input type="text" id="org-nome" class="form-control">
+                            <label for="org-nome" class="form-label small fw-semibold">Nome da Instituição *</label>
+                            <input type="text" id="org-nome" class="form-control" placeholder="Ex: Associação Comunitária Vida Nova">
                         </div>
                         <div class="row g-2 mb-2">
                             <div class="col-6">
-                                <label for="org-tipo" class="form-label">Tipo</label>
+                                <label for="org-tipo" class="form-label small fw-semibold">Tipo</label>
                                 <select id="org-tipo" class="form-select">
                                     <option>Associação</option>
                                     <option>Igreja</option>
@@ -84,31 +88,31 @@
                                 </select>
                             </div>
                             <div class="col-6">
-                                <label for="org-cnpj" class="form-label">CNPJ (Opcional)</label>
-                                <input type="text" id="org-cnpj" class="form-control">
+                                <label for="org-cnpj" class="form-label small fw-semibold">CNPJ (Opcional)</label>
+                                <input type="text" id="org-cnpj" class="form-control" placeholder="00.000.000/0001-00">
                             </div>
                         </div>
                         <div class="mb-2">
-                            <label for="org-endereco" class="form-label">Endereço de Entrega</label>
+                            <label for="org-endereco" class="form-label small fw-semibold">Endereço de Entrega *</label>
                             <input type="text" id="org-endereco" class="form-control" placeholder="Rua, número">
                         </div>
                         <div class="row g-2 mb-2">
                             <div class="col-6">
-                                <label for="org-bairro" class="form-label">Bairro</label>
+                                <label for="org-bairro" class="form-label small fw-semibold">Bairro *</label>
                                 <input type="text" id="org-bairro" class="form-control">
                             </div>
                             <div class="col-6">
-                                <label for="org-cidade" class="form-label">Cidade</label>
+                                <label for="org-cidade" class="form-label small fw-semibold">Cidade *</label>
                                 <input type="text" id="org-cidade" class="form-control" value="São Lourenço do Piauí">
                             </div>
                         </div>
                         <div class="mb-2">
-                            <label for="org-horario" class="form-label">Horário de Atendimento</label>
+                            <label for="org-horario" class="form-label small fw-semibold">Horário de Atendimento *</label>
                             <input type="text" id="org-horario" class="form-control" placeholder="Seg a Sex, 08h às 17h">
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-elo w-100 mt-2">Finalizar Cadastro</button>
+                    <button type="submit" class="btn btn-elo w-100 py-2 mt-3">Finalizar Cadastro</button>
                 </form>
             </div>
         </div>

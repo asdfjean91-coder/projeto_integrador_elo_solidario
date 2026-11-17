@@ -21,7 +21,6 @@
     <main class="container my-4">
         <div id="status-org-box" class="mb-4"></div>
 
-        <!-- Indicadores rápidos -->
         <div class="row g-3 mb-4">
             <div class="col-md-4">
                 <div class="step-card p-3 text-center">
@@ -44,28 +43,30 @@
         </div>
 
         <div class="row g-4">
-            <!-- Coluna Esquerda: Criar Campanha e Prestação de Contas -->
             <div class="col-lg-5">
                 <div class="card border-0 p-4 shadow-sm mb-4" style="border-radius: 20px;">
-                    <h2 class="h5 fw-bold text-success mb-3">📢 Criar Nova Campanha</h2>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2 class="h5 fw-bold text-success mb-0">📢 Nova Campanha</h2>
+                        <a href="nova-campanha.html" class="btn btn-outline-success btn-sm">Tela Cheia ↗</a>
+                    </div>
                     <form id="form-nova-campanha">
                         <div class="mb-2">
-                            <label for="camp-titulo" class="form-label small fw-semibold">Título da Campanha</label>
-                            <input type="text" id="camp-titulo" class="form-control" placeholder="Ex: Cesta Básica Solidária" required>
+                            <label for="camp-titulo" class="form-label small fw-semibold">Título</label>
+                            <input type="text" id="camp-titulo" class="form-control" required>
                         </div>
                         <div class="mb-2">
-                            <label for="camp-desc" class="form-label small fw-semibold">Descrição e Objetivo</label>
-                            <textarea id="camp-desc" class="form-control" rows="2" placeholder="Explique quem será beneficiado..." required></textarea>
+                            <label for="camp-desc" class="form-label small fw-semibold">Descrição</label>
+                            <textarea id="camp-desc" class="form-control" rows="2" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="camp-fim" class="form-label small fw-semibold">Data de Encerramento</label>
                             <input type="date" id="camp-fim" class="form-control" required>
                         </div>
 
-                        <label class="form-label small fw-semibold">Itens Necessários e Metas (RN02)</label>
+                        <label class="form-label small fw-semibold">Itens e Metas (RN02)</label>
                         <div id="container-itens-campanha" class="mb-2"></div>
                         <button type="button" id="btn-add-item-camp" class="btn btn-outline-success btn-sm w-100 mb-3">
-                            + Adicionar outro item do catálogo
+                            + Adicionar outro item
                         </button>
 
                         <button type="submit" class="btn btn-elo w-100 py-2">Publicar Campanha</button>
@@ -85,14 +86,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="dist-desc" class="form-label small fw-semibold">Resumo da Entrega (sem dados pessoais)</label>
-                            <textarea id="dist-desc" class="form-control" rows="2" placeholder="Ex: Entrega de 30 cestas básicas na comunidade..." required></textarea>
+                            <textarea id="dist-desc" class="form-control" rows="2" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-elo-amarelo w-100 py-2">Publicar Prestação de Contas</button>
                     </form>
                 </div>
             </div>
 
-            <!-- Coluna Direita: Confirmar Recebimento e Campanhas -->
             <div class="col-lg-7">
                 <div class="card border-0 p-4 shadow-sm mb-4" style="border-radius: 20px;">
                     <div class="d-flex justify-content-between align-items-center mb-3">

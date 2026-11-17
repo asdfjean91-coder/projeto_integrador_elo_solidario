@@ -27,7 +27,12 @@ async function initPainelOrg() {
 
     const { data: perfil } = await supabase.from('usuario').select('perfil').eq('id', user.id).single();
     if (perfil?.perfil !== 'organizacao') {
-        document.querySelector('main').innerHTML = '<div class="alert alert-danger">Erro 403: Acesso restrito a organizações receptoras.</div>';
+        document.querySelector('main').innerHTML = `
+            <div class="alert alert-warning rounded-4 shadow-sm">
+                <h4 class="alert-heading h6 fw-bold">🔒 Acesso restrito a Organizações</h4>
+                <p class="small mb-2">Seu perfil atual é <strong>${(perfil?.perfil || 'doador').toUpperCase()}</strong>.</p>
+                <a href="login.html?perfil=organizacao" class="btn btn-success btn-sm fw-bold">Cadastrar uma Organização</a>
+            </div>`;
         return;
     }
 

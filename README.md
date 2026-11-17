@@ -8,6 +8,6 @@ Plataforma web para arrecadação e doação de alimentos e itens básicos a fam
 
 1. Crie um projeto gratuito no [Supabase](https://supabase.com).
 2. No **SQL Editor** do Supabase, execute o arquivo `sql/schema.sql`.
-3. Em **Authentication -> Providers -> Email**, desative *Confirm email* para facilitar testes.
+3. Em **Authentication -> Sign In / Providers**, desative *Confirm email* e clique em *Save changes*.
 4. Copie a **Project URL** e a **anon public key** em **Project Settings -> API** e cole no arquivo `js/supabase-client.js`.
-5. Suba os arquivos para um repositório no GitHub e ative o **GitHub Pages** na branch `main`.
+5. Suba todos os arquivos da pasta para o repositório no GitHub e ative o **GitHub Pages** na branch `main`.

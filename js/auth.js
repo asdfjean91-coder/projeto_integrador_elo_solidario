@@ -4,8 +4,34 @@ const alerta = document.getElementById('alerta-auth');
 const selectPerfil = document.getElementById('cad-perfil');
 const camposOrg = document.getElementById('campos-org');
 
+function alternarCamposOrg(isOrg) {
+    camposOrg.classList.toggle('d-none', !isOrg);
+    document.getElementById('org-nome').required = isOrg;
+    document.getElementById('org-endereco').required = isOrg;
+    document.getElementById('org-bairro').required = isOrg;
+    document.getElementById('org-horario').required = isOrg;
+}
+
 selectPerfil.addEventListener('change', () => {
-    camposOrg.classList.toggle('d-none', selectPerfil.value !== 'organizacao');
+    alternarCamposOrg(selectPerfil.value === 'organizacao');
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const aba = urlParams.get('aba');
+    const perfilUrl = urlParams.get('perfil');
+
+    if (aba === 'cadastro' || perfilUrl === 'organizacao') {
+        const tabCadastroBtn = document.querySelector('[data-bs-target="#tab-cadastro"]');
+        if (tabCadastroBtn && window.bootstrap) {
+            new window.bootstrap.Tab(tabCadastroBtn).show();
+        }
+    }
+
+    if (perfilUrl === 'organizacao') {
+        selectPerfil.value = 'organizacao';
+        alternarCamposOrg(true);
+    }
 });
 
 // LOGIN
@@ -28,7 +54,7 @@ document.getElementById('form-login').addEventListener('submit', async (e) => {
     if (error) {
         let msgErro = 'E-mail ou senha inválidos.';
         if (error.message.includes('Email not confirmed')) {
-            msgErro = 'E-mail ainda não confirmado no Supabase. Desative "Confirm email" em Authentication > Providers > Email e exclua este usuário antigo para cadastrar de novo.';
+            msgErro = 'E-mail ainda não confirmado no Supabase. Desative "Confirm email" em Authentication > Sign In / Providers.';
         }
         alerta.innerHTML = `<div class="alert alert-danger" role="alert">${msgErro}</div>`;
         return;
@@ -65,7 +91,6 @@ document.getElementById('form-cadastro').addEventListener('submit', async (e) =>
         org_horario: document.getElementById('org-horario').value.trim()
     };
 
-    // 1. Cria a conta no Supabase Auth
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -79,7 +104,6 @@ document.getElementById('form-cadastro').addEventListener('submit', async (e) =>
         return;
     }
 
-    // 2. Garante gravação nas tabelas caso o trigger ainda não tenha sido criado
     await supabase.from('usuario').upsert({
         id: data.user.id,
         nome,
@@ -101,22 +125,15 @@ document.getElementById('form-cadastro').addEventListener('submit', async (e) =>
             status: 'pendente'
         }, { onConflict: 'usuario_id' });
     }
-// Abre automaticamente a aba "Criar Conta" se vier de ?aba=cadastro
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('aba') === 'cadastro') {
-    const tabCadastroBtn = document.querySelector('[data-bs-target="#tab-cadastro"]');
-    if (tabCadastroBtn) {
-        new bootstrap.Tab(tabCadastroBtn).show();
-    }
-}
-    // 3. Faz login automático imediatamente após o cadastro
+
     await supabase.auth.signInWithPassword({ email, password });
 
     btnSubmit.disabled = false;
     btnSubmit.textContent = 'Finalizar Cadastro';
     e.target.reset();
-    camposOrg.classList.add('d-none');
+    alternarCamposOrg(false);
 
+    const destino = perfil === 'organizacao' ? 'painel-org.html' : 'index.html';
     const avisoExtra = perfil === 'organizacao'
         ? '<p class="mb-2 small">Sua organização foi cadastrada e está <strong>aguardando aprovação do administrador</strong> (RN01).</p>'
         : '<p class="mb-2 small">Você já está conectado e pronto para realizar suas doações!</p>';
@@ -127,7 +144,7 @@ if (urlParams.get('aba') === 'cadastro') {
             <p class="mb-1">Seja muito bem-vindo(a), <strong>${nome}</strong>!</p>
             ${avisoExtra}
             <hr>
-            <a href="index.html" class="btn btn-success btn-sm fw-bold">Entrar na Plataforma Agora →</a>
+            <a href="${destino}" class="btn btn-success btn-sm fw-bold">Acessar Plataforma Agora →</a>
         </div>
     `;
     window.scrollTo({ top: 0, behavior: 'smooth' });

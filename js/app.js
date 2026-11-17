@@ -43,27 +43,11 @@ async function carregarCampanhas() {
                 <div class="fs-1 mb-2">🌻</div>
                 <h3 class="h6 fw-bold">Nenhuma campanha encontrada no momento</h3>
                 <p class="small text-muted mb-3">Organizações verificadas podem publicar novas metas a qualquer instante.</p>
-                <a href="login.html" class="btn btn-elo btn-sm px-3">Cadastrar Organização</a>
+                <a href="login.html?perfil=organizacao" class="btn btn-elo btn-sm px-3">Cadastrar Organização</a>
             </div>`;
         return;
     }
-document.addEventListener('DOMContentLoaded', () => {
-    // Inicializa o slide do Hero automaticamente
-    const heroEl = document.getElementById('heroCarousel');
-    if (heroEl && window.bootstrap) {
-        new window.bootstrap.Carousel(heroEl, {
-            interval: 4000,
-            ride: 'carousel',
-            pause: 'hover'
-        });
-    }
 
-    carregarNavbar();
-    carregarCampanhas();
-    document.getElementById('filtro-busca').addEventListener('input', carregarCampanhas);
-    document.getElementById('filtro-cidade').addEventListener('input', carregarCampanhas);
-    document.getElementById('filtro-status').addEventListener('change', carregarCampanhas);
-});
     container.innerHTML = filtradas.map((c, idx) => {
         const totalMeta = c.campanha_item.reduce((acc, i) => acc + i.quantidade_meta, 0);
         const totalRec = c.campanha_item.reduce((acc, i) => acc + i.quantidade_recebida, 0);
@@ -95,6 +79,15 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const heroEl = document.getElementById('heroCarousel');
+    if (heroEl && window.bootstrap) {
+        new window.bootstrap.Carousel(heroEl, {
+            interval: 4000,
+            ride: 'carousel',
+            pause: 'hover'
+        });
+    }
+
     carregarNavbar();
     carregarCampanhas();
     document.getElementById('filtro-busca').addEventListener('input', carregarCampanhas);

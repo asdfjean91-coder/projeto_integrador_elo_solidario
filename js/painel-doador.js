@@ -16,7 +16,7 @@ async function carregarDoacoes() {
 
     const container = document.getElementById('lista-minhas-doacoes');
     if (!doacoes || doacoes.length === 0) {
-        container.innerHTML = `<div class="alert alert-info">Você ainda não registrou nenhuma doação.</div>`;
+        container.innerHTML = `<div class="alert alert-info rounded-4">Você ainda não registrou nenhuma doação. Escolha uma campanha na página inicial!</div>`;
         return;
     }
 
@@ -24,15 +24,15 @@ async function carregarDoacoes() {
         const badge = d.status === 'entregue' ? 'bg-success' : (d.status === 'prometida' ? 'bg-warning text-dark' : 'bg-secondary');
         const itensTxt = d.doacao_item.map(di => `${di.quantidade} ${di.campanha_item.item.unidade} de ${di.campanha_item.item.nome}`).join(', ');
         return `
-        <div class="card p-3 mb-3 shadow-sm">
+        <div class="card border-0 p-4 mb-3 shadow-sm" style="border-radius: 18px;">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <span class="badge bg-dark fs-6">${d.codigo}</span>
-                <span class="badge ${badge} text-uppercase">${d.status}</span>
+                <span class="badge ${badge} text-uppercase px-3 py-2">${d.status}</span>
             </div>
             <h2 class="h6 fw-bold mb-1">${d.campanha.titulo}</h2>
-            <p class="small text-muted mb-1">Local: ${d.campanha.organizacao.nome} (${d.campanha.organizacao.endereco}, ${d.campanha.organizacao.bairro})</p>
-            <p class="small mb-1"><strong>Itens:</strong> ${itensTxt}</p>
-            <small class="text-muted">Entrega prevista: ${new Date(d.data_prevista + 'T00:00:00').toLocaleDateString('pt-BR')}</small>
+            <p class="small text-muted mb-1">📍 Local: ${d.campanha.organizacao.nome} (${d.campanha.organizacao.endereco}, ${d.campanha.organizacao.bairro})</p>
+            <p class="small mb-1"><strong>📦 Itens:</strong> ${itensTxt}</p>
+            <small class="text-muted">📅 Entrega prevista: ${new Date(d.data_prevista + 'T00:00:00').toLocaleDateString('pt-BR')}</small>
         </div>`;
     }).join('');
 }

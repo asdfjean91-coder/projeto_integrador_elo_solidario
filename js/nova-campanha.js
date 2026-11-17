@@ -58,7 +58,7 @@ async function inicializarPagina() {
             <div class="alert alert-warning rounded-4 shadow-sm">
                 <h4 class="alert-heading h6 fw-bold">🔒 Área exclusiva de Organizações</h4>
                 <p class="small mb-2">Sua conta atual está com perfil <strong>${(perfil?.perfil || 'doador').toUpperCase()}</strong>. Apenas instituições verificadas podem criar campanhas (RN01).</p>
-                <a href="login.html?aba=cadastro" class="btn btn-success btn-sm fw-bold">Cadastrar uma Organização</a>
+                <a href="login.html?perfil=organizacao" class="btn btn-success btn-sm fw-bold">Cadastrar uma Organização</a>
             </div>`;
         return;
     }

@@ -28,13 +28,13 @@ async function carregarDetalhe() {
 
     document.getElementById('detalhe-campanha').innerHTML = `
         <h1 class="h4 fw-bold text-success">${camp.titulo}</h1>
-        <p class="text-muted mb-2">${camp.descricao}</p>
-        <div class="hero-card p-3 small mb-3">
-            <strong>Ponto de entrega:</strong> ${camp.organizacao.nome} — ${camp.organizacao.endereco}, ${camp.organizacao.bairro}, ${camp.organizacao.cidade}/${camp.organizacao.uf}<br>
-            <strong>Horário:</strong> ${camp.organizacao.horario_atendimento}<br>
+        <p class="text-muted mb-3">${camp.descricao}</p>
+        <div class="hero-card p-3 small mb-4">
+            <strong>📍 Ponto de entrega:</strong> ${camp.organizacao.nome} — ${camp.organizacao.endereco}, ${camp.organizacao.bairro}, ${camp.organizacao.cidade}/${camp.organizacao.uf}<br>
+            <strong>🕒 Horário:</strong> ${camp.organizacao.horario_atendimento}<br>
             ${linkWpp}
         </div>
-        <h2 class="h6 fw-bold mb-2">Itens Necessários</h2>
+        <h2 class="h6 fw-bold mb-3">Itens Necessários</h2>
         ${camp.campanha_item.map(ci => {
             const prometido = ci.doacao_item
                 .filter(di => di.doacao?.status === 'prometida')
@@ -46,7 +46,7 @@ async function carregarDetalhe() {
 
             return `
             <div class="mb-3">
-                <div class="d-flex justify-content-between small fw-semibold">
+                <div class="d-flex justify-content-between small fw-semibold mb-1">
                     <span>${ci.item.nome} (${ci.item.unidade})</span>
                     <span>Recebido: ${ci.quantidade_recebida}/${ci.quantidade_meta} (Falta: ${saldo})</span>
                 </div>
@@ -58,7 +58,7 @@ async function carregarDetalhe() {
     `;
 
     document.getElementById('lista-itens-doar').innerHTML = itensDisponiveis.map(it => `
-        <div class="d-flex justify-content-between align-items-center border rounded p-2 mb-2">
+        <div class="d-flex justify-content-between align-items-center border rounded-3 p-3 mb-2 bg-light">
             <div>
                 <div class="fw-semibold">${it.nome}</div>
                 <small class="text-muted">Saldo restante: ${it.saldo} ${it.unidade}</small>
@@ -119,7 +119,7 @@ document.getElementById('form-doacao').addEventListener('submit', async (e) => {
 
     alerta.innerHTML = `
         <div class="alert alert-success">
-            <strong>Doação registrada com sucesso!</strong><br>
+            <strong>🎉 Doação registrada com sucesso!</strong><br>
             Apresente o código <span class="badge bg-dark fs-6">${codigo}</span> no ponto de entrega.
         </div>`;
     e.target.reset();

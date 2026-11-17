@@ -1,7 +1,7 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 const SUPABASE_URL = 'https://jtvvlelisnuskqumjvxp.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0dnZsZWxpc251c2txdW1qdnhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MjQwMTQsImV4cCI6MjExMDQwMDAxNH0.XaUZeXVEKC5D3E6OOaDNqkMjHqHbebGYkBkhjFv6HME'; // Mantenha a sua chave anon public que já está no arquivo
+const SUPABASE_ANON_KEY = 'SUA_CHAVE_ANON_PUBLICA';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -10,8 +10,8 @@ export async function carregarNavbar() {
     const navMenu = document.getElementById('nav-acoes');
     if (!navMenu) return;
 
-    // Botões de acesso rápido visíveis na barra superior
     const linksPerfis = `
+        <a href="index.html#quem-somos" class="btn btn-outline-light btn-sm">🎓 Quem Somos</a>
         <a href="transparencia.html" class="btn btn-outline-light btn-sm">📊 Transparência</a>
         <a href="painel-doador.html" class="btn btn-outline-light btn-sm">💛 Doador</a>
         <a href="painel-org.html" class="btn btn-outline-light btn-sm">🏢 Organização</a>

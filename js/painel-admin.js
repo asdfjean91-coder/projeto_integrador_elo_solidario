@@ -6,11 +6,10 @@ async function carregarAdmin() {
 
     const { data: perfil } = await supabase.from('usuario').select('perfil').eq('id', user.id).single();
     if (perfil?.perfil !== 'admin') {
-        document.querySelector('main').innerHTML = '<div class="alert alert-danger">Erro 403: Acesso restrito ao administrador.</div>';
+        document.querySelector('main').innerHTML = '<div class="alert alert-danger rounded-4">Erro 403: Acesso restrito ao administrador.</div>';
         return;
     }
 
-    // 1. Carrega Organizações
     const { data: orgs } = await supabase.from('organizacao').select('*').order('id', { ascending: false });
     document.getElementById('lista-orgs-admin').innerHTML = (orgs || []).map(o => {
         const corBadge = o.status === 'aprovada' ? 'bg-success' : (o.status === 'pendente' ? 'bg-warning text-dark' : 'bg-danger');
@@ -35,7 +34,6 @@ async function carregarAdmin() {
         });
     });
 
-    // 2. Carrega Categorias e Itens
     const { data: cats } = await supabase.from('categoria').select('*');
     document.getElementById('select-cat-admin').innerHTML = (cats || []).map(c => `<option value="${c.id}">${c.nome}</option>`).join('');
 
